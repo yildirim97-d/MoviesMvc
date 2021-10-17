@@ -1,0 +1,34 @@
+﻿@model MovieModel
+
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.Name)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.Name)
+    </dd>
+</dl>
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.BoxOfficeReturn)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.BoxOfficeReturn)
+    </dd>
+</dl>
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.ProductionYear)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.ProductionYear)
+    </dd>
+</dl>
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.DirectorNamesHtml)
+    </dt>
+    <dd class="col-10">
+        @Html.Raw(Model.DirectorNamesHtml)
+    </dd>
+</dl>

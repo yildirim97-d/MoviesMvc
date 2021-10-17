@@ -1,0 +1,59 @@
+﻿@model MovieModel
+
+@{
+    ViewBag.Title = "Delete Movie";
+}
+
+@*<div class="paddingtop">*@ @* Layout view'ında RenderBody() üzerinde yazıldı *@
+<h2>@ViewBag.Title</h2>
+
+@* Aşağıdaki comment'li kısım _Details parital view'ı üzerinden gelecektir. *@
+@*<dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(m => m.Name)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(m => m.Name)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(m => m.BoxOfficeReturn)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(m => m.BoxOfficeReturn)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(m => m.ProductionYear)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(m => m.ProductionYear)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(m => m.DirectorNamesHtml)
+        </dt>
+        <dd class="col-10">
+            @Html.Raw(Model.DirectorNamesHtml)
+        </dd>
+    </dl>*@
+@Html.Partial("_Details", Model)
+
+<p>Are you sure you want to delete this movie?</p>
+
+@*@using(Html.BeginForm("Delete", "Movies", FormMethod.Post))*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-danger">Yes</button>
+    @:&nbsp;
+    <text>&nbsp;</text>
+    @:&nbsp;
+    @Html.ActionLink("No", "List", null, new { @class = "btn btn-dark" })
+}
+@*</div>*@
+

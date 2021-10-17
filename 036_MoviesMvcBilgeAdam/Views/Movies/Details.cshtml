@@ -1,0 +1,73 @@
+﻿@model MovieModel
+
+@{
+    ViewBag.Title = "Movie Details";
+}
+
+@*<div class="paddingtop">*@ @* Layout view'ında RenderBody() üzerinde yazıldı *@
+
+<h2>Movie Details</h2>
+
+@* Aşağıdaki comment'li kısım _Details parital view'ı üzerinden gelecektir. *@
+@*<div class="row">
+        <div class="col-2">
+            <b>
+                Name
+                @Html.DisplayName("Name")
+                @Html.DisplayNameFor(m => m.Name)
+            </b>
+        </div>
+        <div class="col-4">
+            @Model.Name
+            @Html.DisplayFor(m => m.Name)
+        </div>
+        <div class="col-2">
+            <strong>
+                Production Year
+                @Html.DisplayNameFor(m => m.ProductionYear)
+            </strong>
+        </div>
+        <div class="col-4">
+            @Model.ProductionYear
+            @Html.DisplayFor(m => m.ProductionYear)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <b>
+                Box Office Return
+                @Html.DisplayNameFor(m => m.BoxOfficeReturn)
+            </b>
+        </div>
+        <div class="col-4">
+            @Model.BoxOfficeReturn
+            @Html.DisplayFor(m => m.BoxOfficeReturn)
+        </div>
+        <div class="col-2">
+            <b>
+                Directors
+                @Html.DisplayNameFor(m => m.Directors)
+            </b>
+        </div>
+        <div class="col-4">
+            @{
+                string directors = "";
+                foreach (DirectorModel directorModel in Model.Directors)
+                {
+                    directors += directorModel.Name + " " + directorModel.Surname + "<br />";
+                }
+                @Html.Raw(directors)
+            }
+        </div>
+    </div>*@
+@Html.Partial("_Details", Model)
+
+<div class="row">
+    <div class="col-12">
+        @*@Html.ActionLink("Movie List", "List")*@
+        @*<a href="@Url.Action("List", "Movies")">Movie List</a>*@
+        <a href="@Url.Action("List")">Movie List</a>
+    </div>
+</div>
+@*</div>*@
+

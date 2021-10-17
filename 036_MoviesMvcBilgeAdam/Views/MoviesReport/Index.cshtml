@@ -1,0 +1,95 @@
+﻿@*@model List<MovieReportInnerJoinModel>*@
+@model MoviesReportIndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_MoviesReportLayout.cshtml";
+    ViewBag.Title = "Movies Report";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Index", "MoviesReport", FormMethod.Get, new { id = "fMoviesReport", autocomplete = "off" }))
+{
+    <div class="row paddingtop">
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.OnlyMatchedValue)
+        </div>
+        <div class="col-2">
+            @Html.DropDownListFor(model => model.OnlyMatchedValue, Model.OnlyMatchedSelectList, new { @class = "form-control", id = "ddlOnlyMatchedValue" })
+        </div>
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.MovieName)
+        </div>
+        <div class="col-2">
+            @Html.TextBoxFor(model => model.MovieName, new { @class = "form-control" })
+        </div>
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.ProductionYears)
+        </div>
+        <div class="col-2">
+            @Html.ListBoxFor(model => model.ProductionYears, Model.ProductionYearMultiSelectList, new { @class = "form-control listbox" })
+        </div>
+    </div>
+    <div class="row paddingtop">
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.BoxOfficeReturn1)
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.BoxOfficeReturn1, new { @class = "form-control" })
+                <span class="input-group-text">-</span>
+                @Html.TextBoxFor(model => model.BoxOfficeReturn2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.ReviewDate1)
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.ReviewDate1, new { @class = "form-control tbDate" })
+                <span class="input-group-text">-</span>
+                @Html.TextBoxFor(model => model.ReviewDate2, new { @class = "form-control tbDate" })
+            </div>
+        </div>
+    </div>
+    <div class="row paddingtop">
+        <div class="offset-2 col-10">
+            <button type="submit" class="btn btn-primary">Search</button>
+            &nbsp;&nbsp;&nbsp;
+
+            @*<button type="reset" class="btn btn-info">Clear</button>*@
+            @*@Html.ActionLink("Clear", "Index", "MoviesReport", new { @class = "btn btn-info" })*@
+            <a href="@Url.Action("Index")" class="btn btn-info">Clear</a>
+
+            &nbsp;&nbsp;&nbsp;
+            <a href="@Url.Action("Export")" class="btn btn-success">Export</a>
+        </div>
+    </div>
+}
+<div class="row paddingtop">
+    <div class="col-12">
+
+        @Html.Partial("_MoviesReport", Model)
+
+    </div>
+</div>
+
+@section scripts {
+    @Styles.Render("~/plugins/datepickercss")
+    @Scripts.Render("~/plugins/datepickerjs")
+
+    <script>
+        $(document).ready(function () {
+            $("#ddlOnlyMatchedValue").change(function () {
+                //console.log($("#ddlOnlyMatchedValue").val());
+                $("#fMoviesReport").submit();
+            });
+            $('.tbDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "bottom auto",
+                format: "mm/dd/yyyy"
+            });
+        });
+    </script>
+}

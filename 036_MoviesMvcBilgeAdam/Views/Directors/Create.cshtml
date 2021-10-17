@@ -1,0 +1,27 @@
+﻿@*@model _036_MoviesMvcBilgeAdam.Entities.Director*@
+@model DirectorModel
+
+@{
+    ViewBag.Title = "Create New Director";
+}
+
+<h2>Create New Director</h2>
+
+@Html.Partial("_CreateEdit", Model)
+
+<div>
+    @Html.ActionLink("Back to Director List", "Index")
+</div>
+
+@section scripts
+{
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        //alert("Create New Director");
+        console.log("Create New Director");
+    </script>
+}

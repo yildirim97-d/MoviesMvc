@@ -1,0 +1,96 @@
+﻿@model MoviesReportAjaxIndexViewModel
+
+@{
+    Layout = "~/Views/Shared/_MoviesReportLayout.cshtml";
+    ViewBag.Title = "Movies Report | AJAX";
+
+    var ajaxOptions = new AjaxOptions()
+    {
+        AllowCache = false,
+        Url = Url.Action("Index", "MoviesReportAjax"),
+        HttpMethod = "post",
+        UpdateTargetId = "divMoviesReport",
+        InsertionMode = InsertionMode.Replace
+    };
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Ajax.BeginForm(null, null, ajaxOptions, new { autocomplete = "off" }))
+{
+    <div class="row paddingtop">
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.MovieName)
+        </div>
+        <div class="col-2">
+            @Html.TextBoxFor(model => model.MovieName, new { @class = "form-control" })
+        </div>
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.ProductionYears)
+        </div>
+        <div class="col-2">
+            @Html.ListBoxFor(model => model.ProductionYears, Model.ProductionYearMultiSelectList, new { @class = "form-control listbox" })
+        </div>
+    </div>
+    <div class="row paddingtop">
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.BoxOfficeReturn1)
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.BoxOfficeReturn1, new { @class = "form-control" })
+                <span class="input-group-text">-</span>
+                @Html.TextBoxFor(model => model.BoxOfficeReturn2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-2">
+            @Html.DisplayNameFor(model => model.ReviewDate1)
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.ReviewDate1, new { @class = "form-control tbDate" })
+                <span class="input-group-text">-</span>
+                @Html.TextBoxFor(model => model.ReviewDate2, new { @class = "form-control tbDate" })
+            </div>
+        </div>
+    </div>
+    <div class="row paddingtop">
+        <div class="offset-2 col-10">
+            <button type="submit" class="btn btn-primary">Search</button>
+            &nbsp;&nbsp;&nbsp;
+
+            @*<button type="reset" class="btn btn-info">Clear</button>*@
+            @*@Html.ActionLink("Clear", "Index", "MoviesReport", new { @class = "btn btn-info" })*@
+            <a href="@Url.Action("Index")" class="btn btn-info">Clear</a>
+        </div>
+    </div>
+}
+<div class="row paddingtop">
+    <div class="col-12">
+
+        <div id="divMoviesReport">
+
+            @Html.Partial("_MoviesReportAjax", Model)
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    @Styles.Render("~/plugins/datepickercss")
+    @Scripts.Render("~/plugins/datepickerjs")
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.tbDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "bottom auto",
+                format: "mm/dd/yyyy"
+            });
+        });
+    </script>
+}

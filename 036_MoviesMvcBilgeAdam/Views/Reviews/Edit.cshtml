@@ -1,0 +1,113 @@
+﻿@* ~/Views/Reviews/Create.cshtml view'ından kopyalanıp değiştirildi *@
+
+@*@model _036_MoviesMvcBilgeAdam.Entities.Review*@
+@model ReviewModel
+
+@{
+    ViewBag.Title = "Edit Review";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Reviews", FormMethod.Post, new { autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Id)
+
+    <h4>Review</h4>
+    <hr />
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <div class="col-md-10 divradiopaddingtop">
+
+            @foreach (int rating in Model.AllRatings)
+            {
+                @*@Html.RadioButtonFor(model => model.Rating, rating, new { @checked = (rating == Model.Rating ? "true" : "false") })@:&nbsp;@rating&nbsp;&nbsp;&nbsp;*@
+                if (rating == Model.Rating)
+                {
+                    @Html.RadioButtonFor(model => model.Rating, rating, new { @checked = "true" })@:&nbsp;@rating&nbsp;&nbsp;&nbsp;
+                }
+                else
+                {
+                    @Html.RadioButtonFor(model => model.Rating, rating)@:&nbsp;@rating&nbsp;&nbsp;&nbsp;
+                }
+            }
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.DateValue, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.DateValue, new { htmlAttributes = new { @class = "form-control", id = "tbDate" } })
+            
+            @Html.ValidationMessageFor(model => model.DateValue, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+        @Html.LabelFor(model => model.MovieId, htmlAttributes: new { @class = "col-form-label col-md-2" })
+
+        <div class="col-md-10">
+
+            @Html.DropDownListFor(model => model.MovieId, ViewBag.Movies as SelectList, "-- Select Movie --", htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.MovieId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Reviewer, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Reviewer, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Reviewer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-md-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-outline-primary" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Review List", "Index")
+</div>
+
+@section scripts
+{
+    @Styles.Render("~/plugins/datepickercss")
+    @Scripts.Render("~/plugins/datepickerjs")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $('#tbDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "bottom auto",
+                //format: "dd.mm.yyyy",
+                format: "mm/dd/yyyy"
+                //,language: "tr"
+            });
+        });
+    </script>
+}

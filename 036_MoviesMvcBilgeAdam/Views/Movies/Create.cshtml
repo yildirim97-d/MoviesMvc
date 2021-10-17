@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Create New Movie";
+    List<int> years = ViewBag.Years as List<int>;
+    List<DirectorModel> directors = (List<DirectorModel>)ViewBag.Directors;
+}
+
+@*<div class="paddingtop">*@ @* Layout view'ında RenderBody() üzerinde yazıldı *@
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <form action="/Movies/Create" method="post">
+        <!-- method="get" -->
+        <div class="form-group row">
+            <label for="tbName" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tbName" placeholder="Enter movie name." name="Name" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tbBoxOfficeReturn" class="col-sm-2 col-form-label">Box Office Return</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tbBoxOfficeReturn" placeholder="Enter box office return." name="BoxOfficeReturn" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ddlProductionYear" class="col-sm-2 col-form-label">Production Year</label>
+            <div class="col-sm-10">
+                <select id="ddlProductionYear" class="form-control" name="ProductionYear">
+                    <option value="">-- Select Year --</option>
+
+                    @*<option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>*@
+                    @foreach (int year in years)
+                    {
+                        <option value="@year">@year</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="lbDirectorIds" class="col-sm-2 col-form-label">Directors</label>
+            <div class="col-sm-10">
+                <select id="lbDirectorIds" class="form-control" name="DirectorIds" multiple>
+                    @foreach (DirectorModel director in directors)
+                    {
+                        <option value="@director.Id">@(director.Name + " " + director.Surname)</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <!--<div class="col-sm-2">
+
+        </div>
+        <div class="col-sm-10">-->
+            @*<input type="submit" class="btn btn-primary" value="Submit" />*@
+            <!--<button type="submit" class="btn btn-success">Submit</button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>-->
+            <div class="offset-sm-2 col-sm-10">
+                @*<input type="submit" class="btn btn-primary" value="Submit" />*@
+                <button type="submit" class="btn btn-success">Submit</button>
+                &nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-warning">Reset</button>
+                &nbsp;&nbsp;&nbsp;
+                <a href="/Movies/List">Movie List</a>
+            </div>
+        </div>
+    </form>
+@*</div>*@
+

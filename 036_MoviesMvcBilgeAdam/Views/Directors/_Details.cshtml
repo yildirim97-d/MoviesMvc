@@ -1,0 +1,38 @@
+﻿@model DirectorModel
+
+<h4>Director</h4>
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Surname)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Surname)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.RetiredText)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.RetiredText)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.MoviesText)
+    </dt>
+
+    <dd>
+        @Html.Raw(Model.MoviesText)
+    </dd>
+
+</dl>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MovieModels>
+  <MovieModel>
+    <Id>1</Id>
+    <Name>Avatar</Name>
+    <ProductionYear>2009</ProductionYear>
+    <BoxOfficeReturn>1000000</BoxOfficeReturn>
+    <DirectorModels>
+      <DirectorModel>
+        <Id>1</Id>
+        <Name>James</Name>
+        <Surname>Cameron</Surname>
+        <Retired>false</Retired>
+      </DirectorModel>
+    </DirectorModels>
+    <ReviewModels>
+      <Review>
+        <Id>1</Id>
+        <Content>Very good movie.</Content>
+        <Rating>9</Rating>
+        <Reviewer>Çağıl Alsaç</Reviewer>
+        <MovieId>1</MovieId>
+      </Review>
+    </ReviewModels>
+  </MovieModel>
+  <MovieModel>
+    <Id>2</Id>
+    <Name>Sherlock Holmes</Name>
+    <ProductionYear>2009</ProductionYear>
+    <BoxOfficeReturn></BoxOfficeReturn>
+    <DirectorModels>
+      <DirectorModel>
+        <Id>2</Id>
+        <Name>Guy</Name>
+        <Surname>Ritchie</Surname>
+        <Retired>false</Retired>
+      </DirectorModel>
+    </DirectorModels>
+  </MovieModel>
+  <MovieModel>
+    <Id>3</Id>
+    <Name>Law Abiding Citizen</Name>
+    <ProductionYear>2009</ProductionYear>
+    <BoxOfficeReturn>300000</BoxOfficeReturn>
+    <DirectorModels>
+      <DirectorModel>
+        <Id>3</Id>
+        <Name>F. Gary</Name>
+        <Surname>Gray</Surname>
+        <Retired>false</Retired>
+      </DirectorModel>
+    </DirectorModels>
+  </MovieModel>
+  <MovieModel>
+    <Id>4</Id>
+    <Name>Aliens</Name>
+    <ProductionYear>1986</ProductionYear>
+    <BoxOfficeReturn>10000000</BoxOfficeReturn>
+    <DirectorModels>
+      <DirectorModel>
+        <Id>1</Id>
+        <Name>James</Name>
+        <Surname>Cameron</Surname>
+        <Retired>false</Retired>
+      </DirectorModel>
+    </DirectorModels>
+  </MovieModel>
+</MovieModels>

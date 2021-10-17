@@ -1,0 +1,45 @@
+﻿@*@model _036_MoviesMvcBilgeAdam.Entities.Director*@
+@model DirectorModel
+
+@{
+    ViewBag.Title = "Director Details";
+}
+
+<h2>Director Details</h2>
+
+<div>
+    @*<h4>Director</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Retired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Retired)
+        </dd>
+
+    </dl>*@
+    @Html.Partial("_Details", Model)
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Director List", "Index")
+</p>

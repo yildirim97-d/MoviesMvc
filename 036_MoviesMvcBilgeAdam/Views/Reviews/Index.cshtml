@@ -1,0 +1,126 @@
+﻿@*@model IEnumerable<_036_MoviesMvcBilgeAdam.Entities.Review>*@
+@model List<ReviewModel>
+
+@{
+    ViewBag.Title = "Review List";
+}
+
+<h2>Review List</h2>
+
+<p>
+    @Html.ActionLink("New Review", "Create")
+</p>
+
+@if (Model != null && Model.Count > 0)
+{
+    using (Html.BeginForm("Delete", "Reviews", FormMethod.Post, new { id = "fReviews" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("id", null, new { id = "hfReviewId" })
+
+        <table id="reviews" class="display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Movie.Name)*@
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Movie.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Reviewer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.FirstOrDefault().Date)*@
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().DateText)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Movie.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Reviewer)
+                        </td>
+                        <td style="width: 8%;">
+                            @Html.DisplayFor(modelItem => item.Rating)
+                        </td>
+                        <td style="width: 8%;">
+                            @*@Html.DisplayFor(modelItem => item.Date)*@
+                            @Html.DisplayFor(modelItem => item.DateText)@* İngilizce formatlı tarih *@
+                        </td>
+                        <td style="width: 15%; text-align: right;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "aDelete", id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p class="text-secondary">No reviews found.</p>
+}
+
+@section scripts
+{
+    <link href="~/Plugins/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Plugins/DataTables/js/jquery.dataTables.min.js"></script>
+
+    <link href="~/Plugins/AlertifyJS/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/Plugins/AlertifyJS/css/themes/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Plugins/AlertifyJS/alertify.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#reviews').DataTable({
+                "language": {
+                    //"url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Turkish.json"
+                    //"url": "/Plugins/DataTables/files/DataTablesTurkish.json"
+                }
+            });
+
+            $(".aDelete").click(function (event) {
+                event.preventDefault();
+
+                var clickedLink = $(this); // tıklanılan link'i getirir
+                console.log(clickedLink);
+
+                var clickedLinkId = clickedLink.prop("id");
+                console.log(clickedLinkId);
+
+                var clickedLinkHref = clickedLink.prop("href"); // http://domain.com/Reviews/Delete/1
+                console.log(clickedLinkHref);
+                clickedLinkHref = clickedLink.attr("href"); // /Reviews/Delete/1
+                console.log(clickedLinkHref);
+
+                var clickedLinkhrefArray = clickedLinkHref.split("/");
+                clickedLinkId = clickedLinkhrefArray[3];
+                console.log(clickedLinkId);
+
+                $("#hfReviewId").val(clickedLinkId);
+
+                alertify.confirm("Delete Review", "Are you sure you want to delete this review?",
+                    function () { // OK fonksiyonu
+                        //alertify.success('Ok');
+                        $("#fReviews").submit();
+                    },
+                    function () { // Cancel fonksiyonu
+                        //alertify.error('Cancel');
+                    }).set("labels", { ok: "Yes", cancel: "No" });
+            });
+        });
+    </script>
+}

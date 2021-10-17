@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+    //Layout = "~/Views/Shared/_Layout.cshtml"; // ~/Views/_ViewStart.cshtml dosyasında Layout set edildiği için her view'da set edilmesine gerek yok
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron"><h1>Welcome @User.Identity.Name to Movies MVC!</h1></div>
+}
+else
+{
+    <div class="jumbotron"><h1>Welcome to Movies MVC!</h1></div>
+}
+

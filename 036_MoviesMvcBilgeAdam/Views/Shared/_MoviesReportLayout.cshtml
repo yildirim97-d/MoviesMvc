@@ -1,0 +1,85 @@
+﻿@* ~/Views/Shared/_Layout.cshtml'den oluşturulmuştur *@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Movies MVC</title>
+
+    @Styles.Render("~/Content/fontawesome")
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="~/"><i class="fa fa-lg fa-home"></i> Movies MVC</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" href="~/Movies/List"><i class="fa fa-film"></i> Movie List</a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Directors")"><i class="fa fa-users"></i> Director List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Reviews")"><i class="fa fa-comments"></i> Review List</a>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "MoviesReport")"><i class="fa fa-list"></i> Movies Report</a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "MoviesReportAjax")"><i class="fa fa-list"></i> Movies Report | AJAX</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Json", "MoviesReportAjax")"><i class="fa fa-list"></i> Movies Report | JSON</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/MoviesReportAjaxJson.html"><i class="fa fa-list"></i> Movies Report | jQuery AJAX</a>
+                    </li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-fluid body-content">
+
+        <div class="paddingtop">
+
+            @RenderBody()
+
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Bilge Adam</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

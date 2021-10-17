@@ -1,0 +1,38 @@
+﻿@*@model List<DotNetMvc.Entities.Movie>*@ @* ~/Views/Web.config altında namespace ekleyerek aşağıdaki gibi sadece class adını kullanabiliriz *@
+@model List<Movie>
+
+@{
+    ViewBag.Title = "Movie List";
+}
+
+@*<div class="paddingtop">*@ @* Layout view'ında RenderBody() üzerinde yazıldı *@
+<h2>Movie List</h2>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Production Year
+        </th>
+        <th>
+            Box Office Return
+        </th>
+    </tr>
+    @foreach (Movie movie in Model)
+    {
+        <tr>
+            <td>
+                @movie.Name
+            </td>
+            <td>
+                @movie.ProductionYear
+            </td>
+            <td>
+                @movie.BoxOfficeReturn
+            </td>
+        </tr>
+    }
+</table>
+@*</div>*@
+

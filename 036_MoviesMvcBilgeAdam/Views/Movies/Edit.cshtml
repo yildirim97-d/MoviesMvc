@@ -1,0 +1,73 @@
+﻿@model MovieModel
+
+@{
+    ViewBag.Title = "Edit Movie";
+}
+
+@*<div class="paddingtop">*@ @* Layout view'ında RenderBody() üzerinde yazıldı *@
+<h2>@ViewBag.Title</h2>
+
+@*@{
+        //Html.BeginForm("Edit", "Movies", FormMethod.Post);
+        Html.BeginForm();
+    }
+    <span>Movie Edit Form</span>
+    @{
+        Html.EndForm();
+    }*@
+@*@using (Html.BeginForm("Edit", "Movies", FormMethod.Post))*@
+@using (Html.BeginForm())
+{
+    @*<input type="hidden" name="Id" value="@Model.Id" />*@
+    @*@Html.Hidden("Id", Model.Id)*@
+    @Html.HiddenFor(m => m.Id)
+
+    @*@Html.ValidationSummary(true, null, new { @class = "text-warning" })*@
+    @Html.ValidationSummary(false, null, new { @class = "text-warning" })
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group row">
+        @*@Html.Label("Name", new { @class = "col-sm-2 col-form-label" })*@
+        @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @*@Html.TextBox("Name", Model.Name, new { @class = "form-control" })*@
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter movie name." })
+
+            @*@Html.ValidationMessage("Name", new { @class = "text-danger" })*@
+            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.BoxOfficeReturn, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.BoxOfficeReturn, new { @class = "form-control", placeholder = "Enter box office return." })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.ProductionYear, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @*@Html.DropDownList("ProductionYear", ViewData["Years"] as SelectList, "-- Select Year --", new { @class = "form-control" })*@
+            @Html.DropDownListFor(m => m.ProductionYear, ViewData["Years"] as SelectList, "-- Select Year --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ProductionYear, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.DirectorIds, new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.ListBoxFor(m => m.DirectorIds, ViewData["Directors"] as MultiSelectList, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-danger">Reset</button>
+            &nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Movie List", "List")
+        </div>
+    </div>
+}
+
+@*</div>*@
+
